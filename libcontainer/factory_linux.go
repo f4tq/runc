@@ -232,7 +232,7 @@ func (l *LinuxFactory) Load(id string) (Container, error) {
 	}
 	r := &nonChildProcess{
 		processPid:       state.InitProcessPid,
-		processStartTime: state.InitProcessStartTime,
+		processStartTime: uint64(state.InitProcessStartTime),
 		fds:              state.ExternalDescriptors,
 	}
 	// We have to use the RootlessManager.
@@ -241,7 +241,7 @@ func (l *LinuxFactory) Load(id string) (Container, error) {
 	}
 	c := &linuxContainer{
 		initProcess:          r,
-		initProcessStartTime: state.InitProcessStartTime,
+		initProcessStartTime: uint64(state.InitProcessStartTime),
 		id:                   id,
 		config:               &state.Config,
 		initArgs:             l.InitArgs,
